@@ -60,6 +60,16 @@ services:
       SCHEMA_REGISTRY_HOST_NAME: "ws-schema-registry"
       SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: 'ws-zookeeper-1:2181'
 
+  ws-example:
+    build:
+      context: .
+    depends_on:
+      - ws-kafka-1
+      - ws-schema-registry
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: "ws-kafka-1:9092"
+      SCHEMA_REGISTRY_URL: "http://ws-schema-registry:8081"
+
 volumes:
     ws-zookeeper-1-data:
     ws-zookeeper-1-log:
